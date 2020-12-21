@@ -39,6 +39,8 @@ let PokemonRepository = (function() {
     function add(item) {
         if(typeof(item) === 'object') {
         pokemonList.push(item)
+    } else if (Object.keys(item) === 'name', 'height', 'types') {
+        pokemonList.push(item)
     } else {
         console.log('item must be an object, it was not included on the list')
         }
