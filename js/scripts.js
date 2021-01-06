@@ -59,8 +59,10 @@ console.log(PokemonRepository.getAll()); // see repository with the alteration
 
 
 PokemonRepository.getAll().forEach (function (pokemon) {
-    document.write('<p>' + 'The ' + pokemon.name + ' pokemon is ' + pokemon.height + ' inches tall. ' + '</p>')
+
 })
+
+// document.write('<p>' + 'The ' + pokemon.name + ' pokemon is ' + pokemon.height + ' inches tall. ' + '</p>')
 
 // // Attempt 1 Filter() function
 // let PokemonRepository = (function() {
