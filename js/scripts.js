@@ -65,12 +65,20 @@ let PokemonRepository = (function() {
         // append list item to the unordered list
         newList.appendChild(listPokemon);
 
-        // create event so that a click on a pokemon button can be heard
-        // and the function ShowDetails can be executed
-        button.addEventListener('click', function() {
-            ShowDetails(pokemon);
-        });
+        
+        // //  This is a correct answer for exercise 1.6:
+        // // Create event so that a click on a pokemon button can be heard
+        // // and the function ShowDetails can be executed
+        // button.addEventListener('click', function() {
+        //     ShowDetails(pokemon);
+        // });
     }   
+
+        // attempt at advanced task:
+        let button = document.querySelector('ul');
+        button.addEventListener('click', function (pokemon) {
+            ShowDetails(pokemon);
+        })
 
     return {
         add: add,
