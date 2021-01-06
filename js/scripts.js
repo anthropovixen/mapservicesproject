@@ -46,6 +46,30 @@ let PokemonRepository = (function() {
         }
     }
 
+    function addListItem(pokemon) {
+        PokemonRepository.getAll().forEach (function (pokemon) {
+            // create new variable for ul added at 'index.html' file
+            let newList = document.querySelector('ul');
+        
+            // create il element
+            let listItem = document.createElement('li');
+        
+            // create button with pokemon's names for each element
+            let button = document.createElement('button');
+            button.innerText = pokemon.name;
+        
+            // add class to button to style it with css
+            button.classList.add('buttonStyle');
+        
+            // append button to the list item;
+            listItem.appendChild(button);
+        
+            // append list item to the unordered list;
+            newList.appendChild(listItem);
+            
+        })
+    }
+
     return {
         add: add,
         getAll: getAll
@@ -56,29 +80,6 @@ let PokemonRepository = (function() {
 console.log(PokemonRepository.getAll()); //see what's inside the new repository
 PokemonRepository.add({name: 'blastoise', height: 5, types: ['grass', 'electric']}); //add new pokemon to the repository
 console.log(PokemonRepository.getAll()); // see repository with the alteration
-
-
-PokemonRepository.getAll().forEach (function (pokemon) {
-    // create new variable for ul added at 'index.html' file
-    let newList = document.querySelector('ul');
-
-    // create il element
-    let listItem = document.createElement('li');
-
-    // create button with pokemon's names for each element
-    let button = document.createElement('button');
-    button.innerText = pokemon.name;
-
-    // add class to button to style it with css
-    button.classList.add('buttonStyle');
-
-    // append button to the list item;
-    listItem.appendChild(button);
-
-    // append list item to the unordered list;
-    newList.appendChild(listItem);
-    
-})
 
 // document.write('<p>' + 'The ' + pokemon.name + ' pokemon is ' + pokemon.height + ' inches tall. ' + '</p>')
 
