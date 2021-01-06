@@ -75,7 +75,7 @@ let PokemonRepository = (function() {
     }   
 
         // attempt at advanced task:
-        let button = document.querySelector('ul');
+        let button = document.querySelector('.pokemon-list');
         button.addEventListener('click', function (pokemon) {
             ShowDetails(pokemon);
         })
