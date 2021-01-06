@@ -71,6 +71,9 @@ PokemonRepository.getAll().forEach (function (pokemon) {
 
     // add class to button to style it with css
     button.classList.add('buttonStyle');
+
+    // append button to the list item;
+    listItem.appendChild(button);
     
 })
 
