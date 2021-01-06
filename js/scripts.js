@@ -1,26 +1,3 @@
-// let pokemonList = [
-//     {name:'venomoth', height: 4, types: ['bug', 'poison']
-//     },
-//     {name: 'charizard', height: 5, types: ['fire', 'flying']
-//     },
-//     {name: 'baltoy', height: 1, types: ['ground', 'psychic']
-//     },
-//     {name: 'diglett', height: 1, types: 'ground'}
-// ];
-
-// pokemonList.forEach (function (pokemon) {
-//     document.write('<p>' + 'The ' + pokemon.name + ' is ' + pokemon.height + ' inches tall. ' + '</p>')
-// })
-// for(let i = 0; i < pokemonList.length; i++) {
-//     if (pokemonList[i].height > 4) {
-//         document.write('<p>' + pokemonList[i].name + ' height ' + pokemonList[i].height + ' That\'s a big pokemon!' + '</p>');
-//     } else if (pokemonList[i].height > 2 && pokemonList[i].height <= 4 ) {
-//         document.write('<p>' + pokemonList[i].name + ' height ' + pokemonList[i].height + ' That\'s an average pokemon!' + '</p>' );
-//     } else {
-//     document.write('<p>' + pokemonList[i].name + ' height ' + pokemonList[i].height + '</p>');
-//     }
-// }
-
 let PokemonRepository = (function() {
     let pokemonList = [
         {name:'venomoth', height: 4, types: ['bug', 'poison']
@@ -49,10 +26,10 @@ let PokemonRepository = (function() {
     function addListItem(pokemon) {
         PokemonRepository.getAll().forEach (function (pokemon) {
             // create new variable for ul added at 'index.html' file
-            let newList = document.querySelector('ul');
+            let newList = document.querySelector('.pokemon-list');
         
             // create il element
-            let listItem = document.createElement('li');
+            let listPokemon = document.createElement('li');
         
             // create button with pokemon's names for each element
             let button = document.createElement('button');
@@ -61,18 +38,21 @@ let PokemonRepository = (function() {
             // add class to button to style it with css
             button.classList.add('buttonStyle');
         
-            // append button to the list item;
-            listItem.appendChild(button);
+            // append button to the list item
+            listPokemon.appendChild(button);
         
-            // append list item to the unordered list;
+            // append list item to the unordered list
             newList.appendChild(listItem);
             
+            // call addListItem referencing the variable of the IIFE
+            PokemonRepository.addListItem(pokemon);
         })
     }
 
     return {
         add: add,
-        getAll: getAll
+        getAll: getAll,
+        addListItem: addListItem
     };
     
 }) ();
@@ -81,6 +61,30 @@ console.log(PokemonRepository.getAll()); //see what's inside the new repository
 PokemonRepository.add({name: 'blastoise', height: 5, types: ['grass', 'electric']}); //add new pokemon to the repository
 console.log(PokemonRepository.getAll()); // see repository with the alteration
 
+// let pokemonList = [
+//     {name:'venomoth', height: 4, types: ['bug', 'poison']
+//     },
+//     {name: 'charizard', height: 5, types: ['fire', 'flying']
+//     },
+//     {name: 'baltoy', height: 1, types: ['ground', 'psychic']
+//     },
+//     {name: 'diglett', height: 1, types: 'ground'}
+// ];
+
+// pokemonList.forEach (function (pokemon) {
+//     document.write('<p>' + 'The ' + pokemon.name + ' is ' + pokemon.height + ' inches tall. ' + '</p>')
+// })
+// for(let i = 0; i < pokemonList.length; i++) {
+//     if (pokemonList[i].height > 4) {
+//         document.write('<p>' + pokemonList[i].name + ' height ' + pokemonList[i].height + ' That\'s a big pokemon!' + '</p>');
+//     } else if (pokemonList[i].height > 2 && pokemonList[i].height <= 4 ) {
+//         document.write('<p>' + pokemonList[i].name + ' height ' + pokemonList[i].height + ' That\'s an average pokemon!' + '</p>' );
+//     } else {
+//     document.write('<p>' + pokemonList[i].name + ' height ' + pokemonList[i].height + '</p>');
+//     }
+// }
+
+// Code previous to exercise 1.6 to add pokemons to list of pokemons.
 // document.write('<p>' + 'The ' + pokemon.name + ' pokemon is ' + pokemon.height + ' inches tall. ' + '</p>')
 
 // // Attempt 1 Filter() function
