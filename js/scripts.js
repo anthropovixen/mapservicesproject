@@ -68,6 +68,10 @@ PokemonRepository.getAll().forEach (function (pokemon) {
     // create button with pokemon's names for each element
     let button = document.createElement('button');
     button.innerText = pokemon.name;
+
+    // add class to button to style it with css
+    button.classList.add('buttonStyle');
+    
 })
 
 // document.write('<p>' + 'The ' + pokemon.name + ' pokemon is ' + pokemon.height + ' inches tall. ' + '</p>')
