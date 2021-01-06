@@ -61,6 +61,11 @@ console.log(PokemonRepository.getAll()); // see repository with the alteration
 PokemonRepository.getAll().forEach (function (pokemon) {
     // create new variable for ul added at 'index.html' file
     let newList = document.querySelector('ul');
+
+    // create il element
+    let listItem = document.createElement('li');
+
+    
 })
 
 // document.write('<p>' + 'The ' + pokemon.name + ' pokemon is ' + pokemon.height + ' inches tall. ' + '</p>')
