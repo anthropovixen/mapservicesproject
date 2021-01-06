@@ -39,6 +39,12 @@ let PokemonRepository = (function() {
         return repository;
     };
 
+    // create function to show details of pokemon when clicked on
+    function ShowDetails(pokemon) {
+        // Log the data from pokemon
+        console.log(pokemon);
+    }
+
     function addListItem(pokemon) {
         // create new variable for ul added at 'index.html' file
         let newList = document.querySelector('.pokemon-list');
@@ -58,6 +64,10 @@ let PokemonRepository = (function() {
 
         // append list item to the unordered list
         newList.appendChild(listPokemon);
+
+        // create event so that a click on a pokemon button can be heard
+        // and the function ShowDetails can be executed
+        button.addEventListener('click', ShowDetails(pokemon))
     }   
 
     return {
@@ -74,6 +84,8 @@ console.log(PokemonRepository.getAll()); // see repository with the alteration
 PokemonRepository.getAll().forEach (function (pokemon) {
     PokemonRepository.addListItem(pokemon);
 });
+
+
 
 // let pokemonList = [
 //     {name:'venomoth', height: 4, types: ['bug', 'poison']
