@@ -1,12 +1,25 @@
 let PokemonRepository = (function() {
-    let pokemonList = [
-        {name:'venomoth', height: 4, types: ['bug', 'poison']
+    let repository = [
+        {
+        name:'venomoth', 
+        height: 4, 
+        types: ['bug', 'poison']
         },
-        {name: 'charizard', height: 5, types: ['fire', 'flying']
+        {
+        name: 'charizard',
+        height: 5,
+        types: ['fire', 'flying']
         },
-        {name: 'baltoy', height: 1, types: ['ground', 'psychic']
+        {
+        name: 'baltoy',
+        height: 1,
+        types: ['ground', 'psychic']
         },
-        {name: 'diglett', height: 1, types: 'ground'}
+        {
+        name: 'diglett',
+        height: 1, 
+        types: 'ground'
+    }
     ];
 
     function getAll() {
@@ -24,30 +37,28 @@ let PokemonRepository = (function() {
     }
 
     function addListItem(pokemon) {
-        PokemonRepository.getAll().forEach (function (pokemon) {
-            // create new variable for ul added at 'index.html' file
-            let newList = document.querySelector('.pokemon-list');
+        // create new variable for ul added at 'index.html' file
+        let newList = document.querySelector('.pokemon-list');
+
+        // create il element
+        let listPokemon = document.createElement('li');
+
+        // create button with pokemon's names for each element
+        let button = document.createElement('button');
+        button.innerText = pokemon.name;
+
+        // add class to button to style it with css
+        button.classList.add('buttonStyle');
+
+        // append button to the list item
+        listPokemon.appendChild(button);
+
+        // append list item to the unordered list
+        newList.appendChild(listItem);
         
-            // create il element
-            let listPokemon = document.createElement('li');
-        
-            // create button with pokemon's names for each element
-            let button = document.createElement('button');
-            button.innerText = pokemon.name;
-        
-            // add class to button to style it with css
-            button.classList.add('buttonStyle');
-        
-            // append button to the list item
-            listPokemon.appendChild(button);
-        
-            // append list item to the unordered list
-            newList.appendChild(listItem);
-            
-            // call addListItem referencing the variable of the IIFE
-            PokemonRepository.addListItem(pokemon);
-        })
-    }
+        // call addListItem referencing the variable of the IIFE
+        PokemonRepository.addListItem(pokemon);
+        }
 
     return {
         add: add,
@@ -60,6 +71,10 @@ let PokemonRepository = (function() {
 console.log(PokemonRepository.getAll()); //see what's inside the new repository
 PokemonRepository.add({name: 'blastoise', height: 5, types: ['grass', 'electric']}); //add new pokemon to the repository
 console.log(PokemonRepository.getAll()); // see repository with the alteration
+
+PokemonRepository.getAll().forEach (function (pokemon) {
+    PokemonRepository.addListItem(pokemon);
+});
 
 // let pokemonList = [
 //     {name:'venomoth', height: 4, types: ['bug', 'poison']
