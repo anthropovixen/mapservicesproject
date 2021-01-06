@@ -74,6 +74,9 @@ PokemonRepository.getAll().forEach (function (pokemon) {
 
     // append button to the list item;
     listItem.appendChild(button);
+
+    // append list item to the unordered list;
+    newList.appendChild(listItem);
     
 })
 
