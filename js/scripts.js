@@ -22,19 +22,22 @@ let PokemonRepository = (function() {
     }
     ];
 
-    function getAll() {
-        return pokemonList;
-    };
-
-    function add(item) {
-        if(typeof(item) === 'object') {
-        pokemonList.push(item)
-    } else if (Object.keys(item) === 'name', 'height', 'types') {
-        pokemonList.push(item)
+    // function to validate information of pokemons to be added. It must be an object and it must have three fields,
+    //will show message at console.
+    
+    function add(pokemon) {
+        if(typeof(pokemon) === 'object') {
+        repository.push(pokemon)
+    } else if (Object.keys(pokemon) === 'name', 'height', 'types') {
+        repository.push(pokemon)
     } else {
         console.log('item must be an object, it was not included on the list')
         }
     }
+
+    function getAll() {
+        return repository;
+    };
 
     function addListItem(pokemon) {
         // create new variable for ul added at 'index.html' file
@@ -54,18 +57,14 @@ let PokemonRepository = (function() {
         listPokemon.appendChild(button);
 
         // append list item to the unordered list
-        newList.appendChild(listItem);
-        
-        // call addListItem referencing the variable of the IIFE
-        PokemonRepository.addListItem(pokemon);
-        }
+        newList.appendChild(listPokemon);
+    }   
 
     return {
         add: add,
         getAll: getAll,
         addListItem: addListItem
     };
-    
 }) ();
 
 console.log(PokemonRepository.getAll()); //see what's inside the new repository
