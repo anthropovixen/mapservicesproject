@@ -67,7 +67,9 @@ let PokemonRepository = (function() {
 
         // create event so that a click on a pokemon button can be heard
         // and the function ShowDetails can be executed
-        button.addEventListener('click', ShowDetails(pokemon))
+        button.addEventListener('click', function() {
+            ShowDetails(pokemon);
+        });
     }   
 
     return {
