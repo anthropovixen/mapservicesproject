@@ -59,6 +59,11 @@ let PokemonRepository = (function() {
         // add class to button to style it with css
         button.classList.add('buttonStyle');
 
+        // attempt at advanced task:
+        button.addEventListener('click', function (pokemon) {
+            ShowDetails(pokemon);
+        })
+
         // append button to the list item
         listPokemon.appendChild(button);
 
@@ -73,12 +78,6 @@ let PokemonRepository = (function() {
         //     ShowDetails(pokemon);
         // });
     }   
-
-        // attempt at advanced task:
-        let button = document.querySelector('.pokemon-list');
-        button.addEventListener('click', function (pokemon) {
-            ShowDetails(pokemon);
-        })
 
     return {
         add: add,
