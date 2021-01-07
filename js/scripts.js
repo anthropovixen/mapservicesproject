@@ -59,25 +59,22 @@ let PokemonRepository = (function() {
         // add class to button to style it with css
         button.classList.add('buttonStyle');
 
-        // attempt at advanced task:
-        button.addEventListener('click', function (pokemon) {
-            ShowDetails(pokemon);
-        })
+        // call function with details on pokemon on click:
+        addButtonEvent(button, pokemon);
 
         // append button to the list item
         listPokemon.appendChild(button);
 
         // append list item to the unordered list
         newList.appendChild(listPokemon);
-
-        
-        // //  This is a correct answer for exercise 1.6:
-        // // Create event so that a click on a pokemon button can be heard
-        // // and the function ShowDetails can be executed
-        // button.addEventListener('click', function() {
-        //     ShowDetails(pokemon);
-        // });
     }   
+
+    // External function to add Event on click of button with pokemon's names to print on console their details:
+    const addButtonEvent = (button, pokemon) => (
+        button.addEventListener('click', function() {
+            ShowDetails(pokemon);
+        })
+    )
 
     return {
         add: add,
@@ -95,6 +92,13 @@ PokemonRepository.getAll().forEach (function (pokemon) {
 });
 
 
+        // //  This is a correct answer for exercise 1.6, basic way. We are adding an Event Listener
+        // // to buttons with pokemon's names and calling back the function to show their details on console:
+        // // Create event so that a click on a pokemon button can be heard
+        // // and the function ShowDetails can be executed
+        // button.addEventListener('click', function() {
+        //     ShowDetails(pokemon);
+        // });
 
 // let pokemonList = [
 //     {name:'venomoth', height: 4, types: ['bug', 'poison']
