@@ -53,7 +53,7 @@ let PokemonRepository = (function() {
         let listPokemon = document.createElement('li');
 
         // create button with pokemon's names for each element
-        let button = document.createElement('button');
+        const button = document.createElement('button');
         button.innerText = pokemon.name;
 
         // add class to button to style it with css
