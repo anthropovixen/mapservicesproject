@@ -31,7 +31,7 @@ let PokemonRepository = (function() {
     } else if (Object.keys(pokemon) === 'name', 'height', 'types') {
         repository.push(pokemon)
     } else {
-        console.log('item must be an object, it was not included on the list')
+        throw('item must be an object, it was not included on the list')
         }
     }
 
