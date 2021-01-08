@@ -27,7 +27,9 @@ let PokemonRepository = (function() {
     const itemCheck = (item) => {
         console.log('Types: ', item['types']);
 
-        const itemArray = item['name'] !==undefined && item['height'] !== undefined && Array.isArray(item['types']) === true;
+        const itemArray = item['name'] !==undefined &&
+        item['height'] !== undefined &&
+        Array.isArray(item['types']) === true;
         
         return itemArray;
     }
