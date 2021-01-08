@@ -80,20 +80,23 @@ let PokemonRepository = (function() {
     return {
         add: add,
         getAll: getAll,
-        addListItem: addListItem
+        addListItem: addListItem,
+        loadList: loadList
     };
 }) ();
 
-console.log(PokemonRepository.getAll()); //see what's inside the new repository
 PokemonRepository.add({name: 'blastoise', height: 5, types: ['grass', 'electric']}); //add new pokemon to the repository
 
 // PokemonRepository.add({height: 5, types: ['grass', 'electric']}); // pokemon with error to test itemCheck function
 
 console.log(PokemonRepository.getAll()); // see repository with the alteration
 
-PokemonRepository.getAll().forEach (function (pokemon) {
-    PokemonRepository.addListItem(pokemon);
+PokemonRepository.loadList().then(function() {
+    PokemonRepository.getAll().forEach (function (pokemon) {
+        PokemonRepository.addListItem(pokemon);
+    });
 });
+
 
 
 // // This snippet of code was used at 1.6 to check that the items added to the repository had the info needed.
