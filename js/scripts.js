@@ -24,11 +24,16 @@ let PokemonRepository = (function() {
 
     // function to validate information of pokemons to be added. It must be an object and it must have three fields,
     //will show message at console.
-    
+    const itemCheck = (item) => {
+        console.log('Types: ', item['types']);
+
+        const itemArray = item['name'] !==undefined && item['height'] !== undefined && Array.isArray(item['types']) === true;
+        
+        return itemArray;
+    }
+
     function add(pokemon) {
-        if(typeof(pokemon) === 'object') {
-        repository.push(pokemon)
-    } else if (Object.keys(pokemon) === 'name', 'height', 'types') {
+        if(itemCheck(pokemon)) {
         repository.push(pokemon)
     } else {
         throw('item must be an object, it was not included on the list')
@@ -85,6 +90,7 @@ let PokemonRepository = (function() {
 
 console.log(PokemonRepository.getAll()); //see what's inside the new repository
 PokemonRepository.add({name: 'blastoise', height: 5, types: ['grass', 'electric']}); //add new pokemon to the repository
+// PokemonRepository.add({height: 5, types: ['grass', 'electric']});
 console.log(PokemonRepository.getAll()); // see repository with the alteration
 
 PokemonRepository.getAll().forEach (function (pokemon) {
