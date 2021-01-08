@@ -90,7 +90,7 @@ let PokemonRepository = (function() {
 
 console.log(PokemonRepository.getAll()); //see what's inside the new repository
 PokemonRepository.add({name: 'blastoise', height: 5, types: ['grass', 'electric']}); //add new pokemon to the repository
-// PokemonRepository.add({height: 5, types: ['grass', 'electric']});
+// PokemonRepository.add({height: 5, types: ['grass', 'electric']}); // pokemon with error to test itemCheck function
 console.log(PokemonRepository.getAll()); // see repository with the alteration
 
 PokemonRepository.getAll().forEach (function (pokemon) {
