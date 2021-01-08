@@ -24,7 +24,7 @@ let PokemonRepository = (function() {
     };
 
     // create function to show details of pokemon when clicked on
-    function ShowDetails(pokemon) {
+    function showDetails(pokemon) {
         // Log the data from pokemon
         console.log(pokemon);
     }
@@ -51,12 +51,13 @@ let PokemonRepository = (function() {
 
         // append list item to the unordered list
         newList.appendChild(listPokemon);
+
     }   
 
     // External function to add Event on click of button with pokemon's names to print on console their details:
     const addButtonEvent = (button, pokemon) => (
         button.addEventListener('click', function() {
-            ShowDetails(pokemon);
+            showDetails(pokemon);
         })
     )
 
@@ -81,7 +82,7 @@ let PokemonRepository = (function() {
         return fetch(url).then(function (response) {
             return response.json();
         }).then(function (details) {
-            item.imageUrl = details.sprites.font_default;
+            item.imageUrl = details.sprites.front_default;
             item.height  = details.heigth;
             item.types = details.types;
         }).catch(function (e) {
