@@ -5,9 +5,8 @@ let PokemonRepository = (function() {
     // function to validate information of pokemons to be added. It must be an object and it must have three fields,
     //will show message at console.
     const itemCheck = (item) => {
-        console.log('Types: ', item['types']);
-
-        const itemArray = item['name'] !==undefined && item['url'] !==undefined;
+        
+        const itemArray = item['name'] !==undefined;
         
         return itemArray;
     }
@@ -85,7 +84,7 @@ let PokemonRepository = (function() {
     };
 }) ();
 
-PokemonRepository.add({name: 'blastoise', height: 5, types: ['grass', 'electric']}); //add new pokemon to the repository
+// PokemonRepository.add({name: 'blastoise', height: 5, types: ['grass', 'electric']}); //add new pokemon to the repository
 
 // PokemonRepository.add({height: 5, types: ['grass', 'electric']}); // pokemon with error to test itemCheck function
 
