@@ -1,26 +1,5 @@
 let PokemonRepository = (function() {
-    let repository = [
-        {
-        name:'venomoth', 
-        height: 4, 
-        types: ['bug', 'poison']
-        },
-        {
-        name: 'charizard',
-        height: 5,
-        types: ['fire', 'flying']
-        },
-        {
-        name: 'baltoy',
-        height: 1,
-        types: ['ground', 'psychic']
-        },
-        {
-        name: 'diglett',
-        height: 1, 
-        types: 'ground'
-    }
-    ];
+    let repository = [];
 
     // function to validate information of pokemons to be added. It must be an object and it must have three fields,
     //will show message at console.
