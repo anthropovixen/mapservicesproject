@@ -100,13 +100,13 @@ PokemonRepository.getAll().forEach (function (pokemon) {
 });
 
 
-        // //  This is a correct answer for exercise 1.6, basic way. We are adding an Event Listener
-        // // to buttons with pokemon's names and calling back the function to show their details on console:
-        // // Create event so that a click on a pokemon button can be heard
-        // // and the function ShowDetails can be executed
-        // button.addEventListener('click', function() {
-        //     ShowDetails(pokemon);
-        // });
+// //  This is a correct answer for exercise 1.6, basic way. We are adding an Event Listener
+// // to buttons with pokemon's names and calling back the function to show their details on console:
+// // Create event so that a click on a pokemon button can be heard
+// // and the function ShowDetails can be executed
+// button.addEventListener('click', function() {
+//     ShowDetails(pokemon);
+// });
 
 // let pokemonList = [
 //     {name:'venomoth', height: 4, types: ['bug', 'poison']
