@@ -7,9 +7,7 @@ let PokemonRepository = (function() {
     const itemCheck = (item) => {
         console.log('Types: ', item['types']);
 
-        const itemArray = item['name'] !==undefined &&
-        item['height'] !== undefined &&
-        Array.isArray(item['types']) === true;
+        const itemArray = item['name'] !==undefined && item['url'] !==undefined;
         
         return itemArray;
     }
@@ -97,6 +95,9 @@ PokemonRepository.getAll().forEach (function (pokemon) {
     PokemonRepository.addListItem(pokemon);
 });
 
+
+// // This snippet of code was used at 1.6 to check that the items added to the repository had the info needed.
+// && item['height'] !== undefined && Array.isArray(item['types']) === true;
 
 // //  This is a correct answer for exercise 1.6, basic way. We are adding an Event Listener
 // // to buttons with pokemon's names and calling back the function to show their details on console:
