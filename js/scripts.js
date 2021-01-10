@@ -1,6 +1,6 @@
 let PokemonRepository = (function() {
     let repository = [];
-    let apiUrl = 'http://pokeapi.co/api/v2/pokemon/?limit=150';
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
     // function to validate information of pokemons to be added. It must be an object and it must have three fields,
     //will show message at console.
