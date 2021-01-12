@@ -28,7 +28,7 @@ let PokemonRepository = (function() {
         // Log the data from pokemon
         console.log(pokemon);
     }
-
+        
     function addListItem(pokemon) {
         // create new variable for ul added at 'index.html' file
         let newList = document.querySelector('.pokemon-list');
@@ -84,7 +84,7 @@ let PokemonRepository = (function() {
             return response.json();
         }).then(function (details) {
             item.imageUrl = details.sprites.front_default;
-            item.height  = details.heigth;
+            item.height  = details.height;
             item.types = details.types;
         }).catch(function (e) {
             console.error(e);
