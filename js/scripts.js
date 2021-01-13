@@ -21,7 +21,7 @@ let PokemonRepository = (function() {
 
     function getAll() {
         return repository;
-    };
+    }
 
     // create function to show details of pokemon when clicked on
     function showDetails(pokemon) {
@@ -51,13 +51,67 @@ let PokemonRepository = (function() {
 
         // append list item to the unordered list
         newList.appendChild(listPokemon);
+    }
 
-    }   
+    function showModal(pokemon) {
+        let modalContainer = document.querySelector('#modal-container');
 
-    // External function to add Event on click of button with pokemon's names to print on console their details:
+        //Clear existing modal content
+        modalContainer.innerHTML = '';
+
+        let modal = document.createElement('div');
+        modal.classList.add('modal');
+
+        //Add the new modal close button
+        let closeButtonElement = document.createElement('button');
+        closeButtonElement.classList.add('modal-close');
+        closeButtonElement.innerText = 'Close';
+        closeButtonElement.addEventListener('click', hideModal);
+
+        //Add title to modal
+        let titleElement = document.createElement('h1');
+        titleElement.innerText = pokemon.name;
+        
+        //Add image of the pokemon to modal
+        let imageElement = document.createElement('img');
+        imageElement.src = pokemon.imageUrl;
+        
+        //Add description to modal
+        let contentElement = document.createElement('p');
+        contentElement.innerText = pokemon.name + ' is ' + pokemon.height + ' tall and has ' + pokemon.types + ' as types.'
+
+        //Append new elements to modal
+        modal.appendChild(closeButtonElement);
+        modal.appendChild(titleElement);
+        modal.appendChild(imageElement);
+        modal.appendChild(contentElement);
+        modalContainer.appendChild(modal);
+
+        modalContainer.classList.add('is-visible');
+    }
+
+    function hideModal() {
+        let modalContainer = document.querySelector('#modal-container');
+        modalContainer.classList.remove('is-visible');
+    }
+
+    window.addEventListener('keydown', (e) => {
+        let modalContainer = document.querySelector('#modal-container');
+        if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+            hideModal();
+        }
+    });
+    
+    // modalContainer.addEventListener('click', (e) => {
+    //     let target = e.target;
+    //     if (target === modalContainer) {
+    //         hideModal();
+    //     }
+    // });
+
     const addButtonEvent = (button, pokemon) => (
         button.addEventListener('click', function() {
-            showDetails(pokemon);
+            showModal(pokemon);
         })
     )
 
@@ -68,7 +122,9 @@ let PokemonRepository = (function() {
             json.results.forEach(function (item) {
                 let pokemon = {
                     name: item.name,
-                    detailsUrl: item.url
+                    detailsUrl: item.url,
+                    height: item.height,
+                    types: item.types
                 };
                 add(pokemon);
                 console.log(pokemon);
@@ -91,9 +147,9 @@ let PokemonRepository = (function() {
         });
     }
 
-    function showDetails(pokemon) {
-        loadDetails(pokemon).then(function () {
-            console.log(pokemon);
+    function showDetails(item) {
+        pokemonRepository.loadDetails(item).then(function () {
+            console.log(item);
         });
     }
 
@@ -104,8 +160,19 @@ let PokemonRepository = (function() {
         loadList: loadList,
         loadDetails: loadDetails,
         showDetails: showDetails
-    };
+    }
 }) ();
+
+// function ShowModal() {
+//     let modalContainer = document.querySelector('#modal-container');
+//     modalContainer.classList.add('is-visible');
+// }
+
+// const addButtonEvent = (button, pokemon) => (
+//     button.addEventListener('click', function() {
+//         showModal(pokemon);
+//     })
+// )
 
 // PokemonRepository.add({name: 'blastoise', height: 5, types: ['grass', 'electric']}); //add new pokemon to the repository
 
