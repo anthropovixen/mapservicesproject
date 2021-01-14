@@ -22,13 +22,7 @@ let PokemonRepository = (function() {
     function getAll() {
         return repository;
     }
-
-    // create function to show details of pokemon when clicked on
-    function showDetails(pokemon) {
-        // Log the data from pokemon
-        console.log(pokemon);
-    }
-        
+    
     function addListItem(pokemon) {
         // create new variable for ul added at 'index.html' file
         let newList = document.querySelector('.pokemon-list');
@@ -78,7 +72,7 @@ let PokemonRepository = (function() {
         
         //Add description to modal
         let contentElement = document.createElement('p');
-        contentElement.innerText = pokemon.name + ' is ' + pokemon.height + ' tall and has ' + pokemon.types + ' as types.'
+        contentElement.innerText = pokemon.name + ' is ' + pokemon.height + ' inches tall.'
 
         //Append new elements to modal
         modal.appendChild(closeButtonElement);
@@ -88,7 +82,7 @@ let PokemonRepository = (function() {
         modalContainer.appendChild(modal);
 
         modalContainer.classList.add('is-visible');
-    }
+    }                   
 
     function hideModal() {
         let modalContainer = document.querySelector('#modal-container');
@@ -102,16 +96,17 @@ let PokemonRepository = (function() {
         }
     });
     
-    // modalContainer.addEventListener('click', (e) => {
-    //     let target = e.target;
-    //     if (target === modalContainer) {
-    //         hideModal();
-    //     }
-    // });
+    let modalContainer = document.querySelector('#modal-container');
+    modalContainer.addEventListener('click', (e) => {
+        let target = e.target;
+        if (target === modalContainer) {
+            hideModal();
+        };
+    });
 
     const addButtonEvent = (button, pokemon) => (
         button.addEventListener('click', function() {
-            showModal(pokemon);
+            showDetails(pokemon);
         })
     )
 
@@ -134,22 +129,24 @@ let PokemonRepository = (function() {
         })
     }
 
-    function loadDetails(item) {
-        let url = item.detailsUrl;
+    function loadDetails(pokemon) {
+        let url = pokemon.detailsUrl;
         return fetch(url).then(function (response) {
             return response.json();
         }).then(function (details) {
-            item.imageUrl = details.sprites.front_default;
-            item.height  = details.height;
-            item.types = details.types;
+            pokemon.imageUrl = details.sprites.front_default;
+            pokemon.height  = details.height;
+            pokemon.types = details.types;
+            return pokemon
         }).catch(function (e) {
             console.error(e);
         });
     }
 
-    function showDetails(item) {
-        pokemonRepository.loadDetails(item).then(function () {
-            console.log(item);
+    function showDetails(pokemon) {
+        loadDetails(pokemon).then(function (response) {
+            console.log(response);
+            showModal(response);
         });
     }
 
