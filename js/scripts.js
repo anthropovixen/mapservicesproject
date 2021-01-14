@@ -71,14 +71,19 @@ let PokemonRepository = (function() {
         imageElement.src = pokemon.imageUrl;
         
         //Add description to modal
-        let contentElement = document.createElement('p');
-        contentElement.innerText = pokemon.name + ' is ' + pokemon.height + ' inches tall.'
+        let contentElementHeight = document.createElement('p');
+        contentElementHeight.innerText = 'Height: ' + pokemon.height;
+        let contentElementTypes = document.createElement('p');
+        let types = ' ';
+        pokemon.types.map(({ type }) => types = types + ' ' + type.name);
+        contentElementTypes.innerText = 'Types: ' + types;
 
         //Append new elements to modal
         modal.appendChild(closeButtonElement);
         modal.appendChild(titleElement);
         modal.appendChild(imageElement);
-        modal.appendChild(contentElement);
+        modal.appendChild(contentElementHeight);
+        modal.appendChild(contentElementTypes);
         modalContainer.appendChild(modal);
 
         modalContainer.classList.add('is-visible');
