@@ -10,7 +10,7 @@ let PokemonRepository = (function() {
         
         return itemArray;
     }
-
+    // Check if pokemon has the correct data to be part of the list. If it doesn't, then error message.
     function add(pokemon) {
         if(itemCheck(pokemon)) {
         repository.push(pokemon)
@@ -46,7 +46,7 @@ let PokemonRepository = (function() {
         // append list item to the unordered list
         newList.appendChild(listPokemon);
     }
-
+    // Show modal with information on pokemon clicked
     function showModal(pokemon) {
         let modalContainer = document.querySelector('#modal-container');
 
@@ -88,7 +88,7 @@ let PokemonRepository = (function() {
 
         modalContainer.classList.add('is-visible');
     }                   
-
+    // Close modal when cliking on X, escape or outside modal
     function hideModal() {
         let modalContainer = document.querySelector('#modal-container');
         modalContainer.classList.remove('is-visible');
@@ -108,13 +108,13 @@ let PokemonRepository = (function() {
             hideModal();
         };
     });
-
+    // Add function to buttons with pokemon's names to open Modal
     const addButtonEvent = (button, pokemon) => (
         button.addEventListener('click', function() {
             showDetails(pokemon);
         })
     )
-
+    // Fetch details of pokemon from API
     function loadList() {
         return fetch(apiUrl).then(function (response) {
             return response.json();
@@ -133,7 +133,7 @@ let PokemonRepository = (function() {
                 console.error(e);
         })
     }
-
+    //Load details of pokemons from API to Modal
     function loadDetails(pokemon) {
         let url = pokemon.detailsUrl;
         return fetch(url).then(function (response) {
@@ -147,14 +147,14 @@ let PokemonRepository = (function() {
             console.error(e);
         });
     }
-
+    //Show details of pokemon on console and on Modal
     function showDetails(pokemon) {
         loadDetails(pokemon).then(function (response) {
             console.log(response);
             showModal(response);
         });
     }
-
+    
     return {
         add: add,
         getAll: getAll,
@@ -164,6 +164,15 @@ let PokemonRepository = (function() {
         showDetails: showDetails
     }
 }) ();
+
+console.log(PokemonRepository.getAll()); // see repository with the alteration
+
+PokemonRepository.loadList().then(function() {
+    PokemonRepository.getAll().forEach (function (pokemon) {
+        PokemonRepository.addListItem(pokemon);
+    });
+});
+
 
 // function ShowModal() {
 //     let modalContainer = document.querySelector('#modal-container');
@@ -179,16 +188,6 @@ let PokemonRepository = (function() {
 // PokemonRepository.add({name: 'blastoise', height: 5, types: ['grass', 'electric']}); //add new pokemon to the repository
 
 // PokemonRepository.add({height: 5, types: ['grass', 'electric']}); // pokemon with error to test itemCheck function
-
-console.log(PokemonRepository.getAll()); // see repository with the alteration
-
-PokemonRepository.loadList().then(function() {
-    PokemonRepository.getAll().forEach (function (pokemon) {
-        PokemonRepository.addListItem(pokemon);
-    });
-});
-
-
 
 // // This snippet of code was used at 1.6 to check that the items added to the repository had the info needed.
 // && item['height'] !== undefined && Array.isArray(item['types']) === true;
