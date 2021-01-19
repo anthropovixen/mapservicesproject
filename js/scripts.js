@@ -56,6 +56,9 @@ let PokemonRepository = (function() {
         modalTitle.empty();
         modalBody.empty();
 
+        // create element for name in modal content
+        let nameElement = $("<h1>" + pokemon.name + "</h1>");
+
     }
 
     // // Show modal with information on pokemon clicked
