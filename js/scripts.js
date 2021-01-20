@@ -57,7 +57,17 @@ let PokemonRepository = (function() {
         modalBody.empty();
 
         // create element for name in modal content
-        let nameElement = $("<h1>" + pokemon.name + "</h1>");
+        let nameElement = $('<h1>' + pokemon.name + '</h1>');
+        //  create img in modal content
+        let imageElementFront = $('img class="modal-img" style="width:50%">');
+        imageElementFront.attr("src", pokemon.imageUrlFront);
+        let imageElementBack = $('<img class="modal-img" style="width:50%">');
+        imageElementBack.attr("src", pokemon.imageUrlBack);
+        // create element for heigth in modal content
+        let heightElement = $('<p>' + "height : " + pokemon.height + '</p>');
+        //  create element for type in modal content
+        let typesElement = $('<p>' + "types : " + pokemon.types + '</p>');
+
 
     }
 
@@ -82,8 +92,8 @@ let PokemonRepository = (function() {
     //     titleElement.innerText = pokemon.name;
         
     //     //Add image of the pokemon to modal
-    //     let imageElement = document.createElement('img');
-    //     imageElement.src = pokemon.imageUrl;
+    //     let imageElementFront = document.createElement('img');
+    //     imageElementFront.src = pokemon.imageUrlFront;
         
     //     //Add description to modal
     //     let contentElementHeight = document.createElement('p');
@@ -154,7 +164,8 @@ let PokemonRepository = (function() {
         return fetch(url).then(function (response) {
             return response.json();
         }).then(function (details) {
-            pokemon.imageUrl = details.sprites.front_default;
+            pokemon.imageUrlFront = details.sprites.front_default;
+            pokemon.imageUrlBack = details.sprites.back_default;
             pokemon.height  = details.height;
             pokemon.types = details.types;
             return pokemon
