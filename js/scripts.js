@@ -47,72 +47,49 @@ let PokemonRepository = (function() {
         newList.appendChild(listPokemon);
     }
     
-    // Show the modal content
-    function showModal (pokemon) {
-        let modalBody = $(".modal-body");
-        let modalTitle = $(".modal-title");
-        let modalHeader = $(".modal-header");
-        // clear existing content of the model
-        modalTitle.empty();
-        modalBody.empty();
+    // Show modal with information on pokemon clicked
+    function showModal(pokemon) {
+        let modalContainer = document.querySelector('#modal-container');
 
-        // create element for name in modal content
-        let nameElement = $('<h1>' + pokemon.name + '</h1>');
-        //  create img in modal content
-        let imageElementFront = $('img class="modal-img" style="width:50%">');
-        imageElementFront.attr("src", pokemon.imageUrlFront);
-        let imageElementBack = $('<img class="modal-img" style="width:50%">');
-        imageElementBack.attr("src", pokemon.imageUrlBack);
-        // create element for heigth in modal content
-        let heightElement = $('<p>' + "height : " + pokemon.height + '</p>');
-        //  create element for type in modal content
-        let typesElement = $('<p>' + "types : " + pokemon.types + '</p>');
+        //Clear existing modal content
+        modalContainer.innerHTML = '';
 
+        let modal = document.createElement('div');
+        modal.classList.add('modal');
 
-    }
+        //Add the new modal close button
+        let closeButtonElement = document.createElement('button');
+        closeButtonElement.classList.add('modal-close');
+        closeButtonElement.innerText = 'Close';
+        closeButtonElement.addEventListener('click', hideModal);
 
-    // // Show modal with information on pokemon clicked
-    // function showModal(pokemon) {
-    //     let modalContainer = document.querySelector('#modal-container');
-
-    //     //Clear existing modal content
-    //     modalContainer.innerHTML = '';
-
-    //     let modal = document.createElement('div');
-    //     modal.classList.add('modal');
-
-    //     //Add the new modal close button
-    //     let closeButtonElement = document.createElement('button');
-    //     closeButtonElement.classList.add('modal-close');
-    //     closeButtonElement.innerText = 'Close';
-    //     closeButtonElement.addEventListener('click', hideModal);
-
-    //     //Add title to modal
-    //     let titleElement = document.createElement('h1');
-    //     titleElement.innerText = pokemon.name;
+        //Add title to modal
+        let titleElement = document.createElement('h1');
+        titleElement.innerText = pokemon.name;
         
-    //     //Add image of the pokemon to modal
-    //     let imageElementFront = document.createElement('img');
-    //     imageElementFront.src = pokemon.imageUrlFront;
+        //Add image of the pokemon to modal
+        let imageElementFront = document.createElement('img');
+        imageElementFront.src = pokemon.imageUrlFront;
         
-    //     //Add description to modal
-    //     let contentElementHeight = document.createElement('p');
-    //     contentElementHeight.innerText = 'Height: ' + pokemon.height;
-    //     let contentElementTypes = document.createElement('p');
-    //     let types = ' ';
-    //     pokemon.types.map(({ type }) => types = types + ' ' + type.name);
-    //     contentElementTypes.innerText = 'Types: ' + types;
+        //Add description to modal
+        let contentElementHeight = document.createElement('p');
+        contentElementHeight.innerText = 'Height: ' + pokemon.height;
+        let contentElementTypes = document.createElement('p');
+        let types = ' ';
+        pokemon.types.map(({ type }) => types = types + ' ' + type.name);
+        contentElementTypes.innerText = 'Types: ' + types;
 
-    //     //Append new elements to modal
-    //     modal.appendChild(closeButtonElement);
-    //     modal.appendChild(titleElement);
-    //     modal.appendChild(imageElement);
-    //     modal.appendChild(contentElementHeight);
-    //     modal.appendChild(contentElementTypes);
-    //     modalContainer.appendChild(modal);
+        //Append new elements to modal
+        modal.appendChild(closeButtonElement);
+        modal.appendChild(titleElement);
+        modal.appendChild(imageElement);
+        modal.appendChild(contentElementHeight);
+        modal.appendChild(contentElementTypes);
+        modalContainer.appendChild(modal);
 
-    //     modalContainer.classList.add('is-visible');
-    // }                   
+        modalContainer.classList.add('is-visible');
+    }                   
+    
     // Close modal when cliking on X, escape or outside modal
     function hideModal() {
         let modalContainer = document.querySelector('#modal-container');
