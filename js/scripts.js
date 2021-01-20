@@ -35,7 +35,8 @@ let PokemonRepository = (function() {
         button.innerText = pokemon.name;
 
         // add class to button to style it with css
-        button.classList.add('buttonStyle');
+        button.classList.add('group-list-item', 'btn-light');
+        // 'buttonStyle', 
 
         // call function with details on pokemon on click:
         addButtonEvent(button, pokemon);
@@ -46,71 +47,7 @@ let PokemonRepository = (function() {
         // append list item to the unordered list
         newList.appendChild(listPokemon);
     }
-    
-    // Show modal with information on pokemon clicked
-    function showModal(pokemon) {
-        let modalContainer = document.querySelector('#modal-container');
 
-        //Clear existing modal content
-        modalContainer.innerHTML = '';
-
-        let modal = document.createElement('div');
-        modal.classList.add('modal');
-
-        //Add the new modal close button
-        let closeButtonElement = document.createElement('button');
-        closeButtonElement.classList.add('modal-close');
-        closeButtonElement.innerText = 'Close';
-        closeButtonElement.addEventListener('click', hideModal);
-
-        //Add title to modal
-        let titleElement = document.createElement('h1');
-        titleElement.innerText = pokemon.name;
-        
-        //Add image of the pokemon to modal
-        let imageElementFront = document.createElement('img');
-        imageElementFront.src = pokemon.imageUrlFront;
-        
-        //Add description to modal
-        let contentElementHeight = document.createElement('p');
-        contentElementHeight.innerText = 'Height: ' + pokemon.height;
-        let contentElementTypes = document.createElement('p');
-        let types = ' ';
-        pokemon.types.map(({ type }) => types = types + ' ' + type.name);
-        contentElementTypes.innerText = 'Types: ' + types;
-
-        //Append new elements to modal
-        modal.appendChild(closeButtonElement);
-        modal.appendChild(titleElement);
-        modal.appendChild(imageElement);
-        modal.appendChild(contentElementHeight);
-        modal.appendChild(contentElementTypes);
-        modalContainer.appendChild(modal);
-
-        modalContainer.classList.add('is-visible');
-    }                   
-    
-    // Close modal when cliking on X, escape or outside modal
-    function hideModal() {
-        let modalContainer = document.querySelector('#modal-container');
-        modalContainer.classList.remove('is-visible');
-    }
-
-    window.addEventListener('keydown', (e) => {
-        let modalContainer = document.querySelector('#modal-container');
-        if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
-            hideModal();
-        }
-    });
-    
-    let modalContainer = document.querySelector('#modal-container');
-    modalContainer.addEventListener('click', (e) => {
-        let target = e.target;
-        if (target === modalContainer) {
-            hideModal();
-        };
-    });
-    // Add function to buttons with pokemon's names to open Modal
     const addButtonEvent = (button, pokemon) => (
         button.addEventListener('click', function() {
             showDetails(pokemon);
@@ -158,13 +95,111 @@ let PokemonRepository = (function() {
         });
     }
     
+    function showModal(pokemon) {
+        let modalBody = $('.modal-body');
+        let modalTitle = $('.modal-title');
+        let modalHeader = $('.modal-header');
+
+        modalHeader.empty();
+        modalTitle.empty();
+        modalBody.empty();
+
+        let nameElement = $('<h1>' + pokemon.name + '</h1>');
+        
+        let imageElementFront = $('<img class="modal-img" style="width:50%">');
+        imageElementFront.attr('src', pokemon.imageUrlFront);
+        
+        let imageElementBack = $('<img class="modal-img" style="width:50%">');
+        imageElementBack.attr('src', pokemon.imageUrlBack);
+
+        let heightElement = $('<p>' + 'height : ' + pokemon.height + '</p>');
+        
+        let typesElement = $('<p>' + 'types : ' + pokemon.types + '</p>');
+
+        modalTitle.append(nameElement);
+        modalBody.append(imageElementFront);
+        modalBody.append(imageElementBack);
+        modalBody.append(heightElement);
+        modalBody.append(typesElement);
+    }
+
+    // // Show modal with information on pokemon clicked
+    // function showModal(pokemon) {
+    //     let modalContainer = document.querySelector('#modal-container');
+
+    //     //Clear existing modal content
+    //     modalContainer.innerHTML = '';
+
+    //     let modal = document.createElement('div');
+    //     modal.classList.add('modal');
+
+    //     //Add the new modal close button
+    //     let closeButtonElement = document.createElement('button');
+    //     closeButtonElement.classList.add('modal-close');
+    //     closeButtonElement.innerText = 'Close';
+    //     closeButtonElement.addEventListener('click', hideModal);
+
+    //     //Add title to modal
+    //     let titleElement = document.createElement('h1');
+    //     titleElement.innerText = pokemon.name;
+        
+    //     //Add front image of the pokemon to modal
+    //     let imageElementFront = document.createElement('img');
+    //     imageElementFront.src = pokemon.imageUrlFront;
+
+    //     // Add back image of the pokemon to modal
+    //     let imageElementBack = document.createElement('img');
+    //     imageElementBack.src = pokemon.imageUrlBack;
+        
+    //     //Add description to modal
+    //     let contentElementHeight = document.createElement('p');
+    //     contentElementHeight.innerText = 'Height: ' + pokemon.height;
+    //     let contentElementTypes = document.createElement('p');
+    //     let types = ' ';
+    //     pokemon.types.map(({ type }) => types = types + ' ' + type.name);
+    //     contentElementTypes.innerText = 'Types: ' + types;
+
+    //     //Append new elements to modal
+    //     modal.appendChild(closeButtonElement);
+    //     modal.appendChild(titleElement);
+    //     modal.appendChild(imageElementFront);
+    //     modal.appendChild(imageElementBack);
+    //     modal.appendChild(contentElementHeight);
+    //     modal.appendChild(contentElementTypes);
+    //     modalContainer.appendChild(modal);
+
+    //     modalContainer.classList.add('is-visible');
+    // }                   
+
+    // // Close modal when cliking on X, escape or outside modal
+    // function hideModal() {
+    //     let modalContainer = document.querySelector('#modal-container');
+    //     modalContainer.classList.remove('is-visible');
+    // }
+
+    // window.addEventListener('keydown', (e) => {
+    //     let modalContainer = document.querySelector('#modal-container');
+    //     if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+    //         hideModal();
+    //     }
+    // });
+    
+    // let modalContainer = document.querySelector('#modal-container');
+    // modalContainer.addEventListener('click', (e) => {
+    //     let target = e.target;
+    //     if (target === modalContainer) {
+    //         hideModal();
+    //     };
+    // });
+    // Add function to buttons with pokemon's names to open Modal
+
     return {
         add: add,
         getAll: getAll,
         addListItem: addListItem,
         loadList: loadList,
         loadDetails: loadDetails,
-        showDetails: showDetails
+        showModal: showModal
     }
 }) ();
 
@@ -175,56 +210,3 @@ PokemonRepository.loadList().then(function() {
         PokemonRepository.addListItem(pokemon);
     });
 });
-
-
-// function ShowModal() {
-//     let modalContainer = document.querySelector('#modal-container');
-//     modalContainer.classList.add('is-visible');
-// }
-
-// const addButtonEvent = (button, pokemon) => (
-//     button.addEventListener('click', function() {
-//         showModal(pokemon);
-//     })
-// )
-
-// PokemonRepository.add({name: 'blastoise', height: 5, types: ['grass', 'electric']}); //add new pokemon to the repository
-
-// PokemonRepository.add({height: 5, types: ['grass', 'electric']}); // pokemon with error to test itemCheck function
-
-// // This snippet of code was used at 1.6 to check that the items added to the repository had the info needed.
-// && item['height'] !== undefined && Array.isArray(item['types']) === true;
-
-// //  This is a correct answer for exercise 1.6, basic way. We are adding an Event Listener
-// // to buttons with pokemon's names and calling back the function to show their details on console:
-// // Create event so that a click on a pokemon button can be heard
-// // and the function ShowDetails can be executed
-// button.addEventListener('click', function() {
-//     ShowDetails(pokemon);
-// });
-
-// let pokemonList = [
-//     {name:'venomoth', height: 4, types: ['bug', 'poison']
-//     },
-//     {name: 'charizard', height: 5, types: ['fire', 'flying']
-//     },
-//     {name: 'baltoy', height: 1, types: ['ground', 'psychic']
-//     },
-//     {name: 'diglett', height: 1, types: 'ground'}
-// ];
-
-// pokemonList.forEach (function (pokemon) {
-//     document.write('<p>' + 'The ' + pokemon.name + ' is ' + pokemon.height + ' inches tall. ' + '</p>')
-// })
-// for(let i = 0; i < pokemonList.length; i++) {
-//     if (pokemonList[i].height > 4) {
-//         document.write('<p>' + pokemonList[i].name + ' height ' + pokemonList[i].height + ' That\'s a big pokemon!' + '</p>');
-//     } else if (pokemonList[i].height > 2 && pokemonList[i].height <= 4 ) {
-//         document.write('<p>' + pokemonList[i].name + ' height ' + pokemonList[i].height + ' That\'s an average pokemon!' + '</p>' );
-//     } else {
-//     document.write('<p>' + pokemonList[i].name + ' height ' + pokemonList[i].height + '</p>');
-//     }
-// }
-
-// Code from exercise 1.5 to add pokemons to list of pokemons.
-// document.write('<p>' + 'The ' + pokemon.name + ' pokemon is ' + pokemon.height + ' inches tall. ' + '</p>')
