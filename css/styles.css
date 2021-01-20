@@ -1,13 +1,18 @@
+.pokemon-list {
+  margin-top: 60px;
+}
+
 body {
     background-color: white;
     text-align: center;
     border: 2px solid 3B4CCA;
 }
 
+
 .buttonStyle {
     background-color: auto;
     border: none;
-    /* color: white; */
+    color: white;
     padding: 16px 32px;
     text-align: center;
     text-decoration: none;
@@ -28,11 +33,12 @@ body {
     color:black;
     border: 1px solid #3B4CCA;
 }
+
 ul {
     list-style: none;
 }
 
-#modal-container {
+/* #modal-container {
     position: fixed;
     padding: 40px;
     box-sizing: border-box;
@@ -40,20 +46,20 @@ ul {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5); */
     
-    /* To show above other content */
+    /* To show above other content
     z-index: 999; 
     
-    /* Scroll allowed if the screen is not high enough*/
+    Scroll allowed if the screen is not high enough
     overflow: auto; 
     
-    /* To center the modal */
+    /* To center the modal
     display: grid;
     text-align: center;
-  }
+  } */
   
-  .modal {
+  /* .modal {
     margin: auto;
     display: inline-block;
     box-sizing: border-box;
@@ -87,4 +93,4 @@ ul {
 
 #modal-container.is-visible {
     display:block;
-}
+} */
