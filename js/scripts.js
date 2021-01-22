@@ -112,9 +112,11 @@ let PokemonRepository = (function() {
         // Create content for Modal
         let imageElementFront = $('<img class="modal-img" style="width:50%">');
         imageElementFront.attr('src', pokemon.imageUrlFront);
+        imageElementFront.attr('sr-only', 'Front image of ' + pokemon.name + '</p>')
         
         let imageElementBack = $('<img class="modal-img" style="width:50%">');
         imageElementBack.attr('src', pokemon.imageUrlBack);
+        imageElementBack.attr('sr-only', 'Back image of ' + pokemon.name + '</p>');
 
         let heightElement = $('<p>' + 'Height : ' + pokemon.height + '</p>');
         
@@ -122,6 +124,7 @@ let PokemonRepository = (function() {
         pokemon.types.map(({ type }) => types = types + ' ' + type.name);
         let contentElementTypes = $('<p>' + 'Types : ' + types + '</p>');
         contentElementTypes.attr('src', pokemon.types);
+
         // Append title and content to Modal
         modalHeader.append(nameElement);
         modalBody.append(imageElementFront);
