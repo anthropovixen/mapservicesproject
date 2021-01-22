@@ -29,14 +29,16 @@ let PokemonRepository = (function() {
 
         // create il element
         let listPokemon = document.createElement('li');
+        listPokemon.classList.add('group-list-item');
 
         // create button with pokemon's names for each element
         const button = document.createElement('button');
         button.innerText = pokemon.name;
 
-        // add class to button to style it with css
-        button.classList.add('group-list-item', 'btn-light');
-        // 'buttonStyle', 
+        // add class to button to style it
+        button.classList.add('buttonStyle', 'group-list-item', 'btn-light');
+        button.setAttribute('data-toggle', 'modal');
+        button.setAttribute('data-target', '#modal-container');
 
         // call function with details on pokemon on click:
         addButtonEvent(button, pokemon);
@@ -112,15 +114,18 @@ let PokemonRepository = (function() {
         let imageElementBack = $('<img class="modal-img" style="width:50%">');
         imageElementBack.attr('src', pokemon.imageUrlBack);
 
-        let heightElement = $('<p>' + 'height : ' + pokemon.height + '</p>');
+        let heightElement = $('<p>' + 'Height : ' + pokemon.height + '</p>');
         
-        let typesElement = $('<p>' + 'types : ' + pokemon.types + '</p>');
+        let types = ' ';
+        pokemon.types.map(({ type }) => types = types + ' ' + type.name);
+        let contentElementTypes = $('<p>' + 'Types : ' + types + '</p>');
+        contentElementTypes.attr('src', pokemon.types);
 
-        modalTitle.append(nameElement);
+        modalHeader.append(nameElement);
         modalBody.append(imageElementFront);
         modalBody.append(imageElementBack);
         modalBody.append(heightElement);
-        modalBody.append(typesElement);
+        modalBody.append(contentElementTypes);
     }
 
     // // Show modal with information on pokemon clicked
