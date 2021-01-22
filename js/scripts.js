@@ -29,13 +29,14 @@ let PokemonRepository = (function() {
 
         // create il element
         let listPokemon = document.createElement('li');
+        // Add class to style it with Bootstrap
         listPokemon.classList.add('group-list-item');
 
         // create button with pokemon's names for each element
         const button = document.createElement('button');
         button.innerText = pokemon.name;
 
-        // add class to button to style it
+        // add class to button to style it with Bootstrap
         button.classList.add('buttonStyle', 'group-list-item', 'btn-light');
         button.setAttribute('data-toggle', 'modal');
         button.setAttribute('data-target', '#modal-container');
@@ -97,17 +98,18 @@ let PokemonRepository = (function() {
         });
     }
     
+    // Show modal with pokemon's details
     function showModal(pokemon) {
         let modalBody = $('.modal-body');
         let modalTitle = $('.modal-title');
         let modalHeader = $('.modal-header');
-
+        // Empty modal
         modalHeader.empty();
         modalTitle.empty();
         modalBody.empty();
-
+        // Create title for Modal
         let nameElement = $('<h1>' + pokemon.name + '</h1>');
-        
+        // Create content for Modal
         let imageElementFront = $('<img class="modal-img" style="width:50%">');
         imageElementFront.attr('src', pokemon.imageUrlFront);
         
@@ -120,7 +122,7 @@ let PokemonRepository = (function() {
         pokemon.types.map(({ type }) => types = types + ' ' + type.name);
         let contentElementTypes = $('<p>' + 'Types : ' + types + '</p>');
         contentElementTypes.attr('src', pokemon.types);
-
+        // Append title and content to Modal
         modalHeader.append(nameElement);
         modalBody.append(imageElementFront);
         modalBody.append(imageElementBack);
