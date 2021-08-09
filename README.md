@@ -19,3 +19,5 @@ Users can find names, images, types and height of Pokemons of their choosing. Th
 [Tanimara Elias Santos](https://github.com/anthropovixen)
 
 ### Version
+
+1.0.0
