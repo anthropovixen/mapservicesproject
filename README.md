@@ -6,7 +6,7 @@ Users can find names, images, types and height of Pokemons of their choosing. Th
 
 **See the hosted application [here](https://anthropovixen.github.io/pokedexproject/).**
 
-![Pokemon Index Showcase](img/PokedexApp - GIF.gif)
+![Pokemon Index Showcase](img/pokedexshowcase.gif)
 
 ## Features
 
