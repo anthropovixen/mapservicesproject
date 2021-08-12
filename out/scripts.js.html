@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: scripts.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: scripts.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let PokemonRepository = (function () {
+	let repository = [];
+	let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+
+	/**  Function to validate information of pokemons to be added.
+	 * It must be an object and it must have three fields,
+	 * will show message at console.
+	 */
+	const itemCheck = (item) => {
+		const itemArray = item['name'] !== undefined;
+
+		return itemArray;
+	};
+	/** Check if pokemon has the correct data to be part of the list.
+	 * If it doesn't, then error message.
+	 */
+	function add(pokemon) {
+		if (itemCheck(pokemon)) {
+			repository.push(pokemon);
+		} else {
+			throw 'item must be an object, it was not included on the list';
+		}
+	}
+
+	function getAll() {
+		return repository;
+	}
+
+	function addListItem(pokemon) {
+		/** create new variable for ul added at 'index.html' file */
+		let newList = document.querySelector('.pokemon-list');
+
+		/** create il element */
+		let listPokemon = document.createElement('li');
+		/** Add class to style it with Bootstrap  */
+		listPokemon.classList.add('group-list-item');
+
+		/** create button with pokemon's names for each element */
+		const button = document.createElement('button');
+		button.innerText = pokemon.name;
+
+		/** add class to button to style it with Bootstrap*/
+		button.classList.add('buttonStyle', 'group-list-item', 'btn-light');
+		button.setAttribute('data-toggle', 'modal');
+		button.setAttribute('data-target', '#modal-container');
+
+		/**  call function with details on pokemon on click:*/
+		addButtonEvent(button, pokemon);
+
+		/** append button to the list item*/
+		listPokemon.appendChild(button);
+
+		/** append list item to the unordered list */
+		newList.appendChild(listPokemon);
+	}
+
+	const addButtonEvent = (button, pokemon) =>
+		button.addEventListener('click', function () {
+			showDetails(pokemon);
+		});
+	/** Fetch details of pokemon from API */
+	function loadList() {
+		return fetch(apiUrl)
+			.then(function (response) {
+				return response.json();
+			})
+			.then(function (json) {
+				json.results.forEach(function (item) {
+					let pokemon = {
+						name: item.name,
+						detailsUrl: item.url,
+						height: item.height,
+						types: item.types,
+					};
+					add(pokemon);
+					console.log(pokemon);
+				});
+			})
+			.catch(function (e) {
+				console.error(e);
+			});
+	}
+	/** Load details of pokemons from API to Modal*/
+	function loadDetails(pokemon) {
+		let url = pokemon.detailsUrl;
+		return fetch(url)
+			.then(function (response) {
+				return response.json();
+			})
+			.then(function (details) {
+				pokemon.imageUrlFront = details.sprites.front_default;
+				pokemon.imageUrlBack = details.sprites.back_default;
+				pokemon.height = details.height;
+				pokemon.types = details.types;
+				return pokemon;
+			})
+			.catch(function (e) {
+				console.error(e);
+			});
+	}
+	/** Show details of pokemon on console and on Modal*/
+	function showDetails(pokemon) {
+		loadDetails(pokemon).then(function (response) {
+			console.log(response);
+			showModal(response);
+		});
+	}
+
+	/** Show modal with pokemon's details*/
+	function showModal(pokemon) {
+		let modalBody = $('.modal-body');
+		let modalTitle = $('.modal-title');
+		let modalHeader = $('.modal-header');
+		/** Empty modal */
+		modalHeader.empty();
+		modalTitle.empty();
+		modalBody.empty();
+		/**Create title for Modal */
+		let nameElement = $('&lt;h1>' + pokemon.name + '&lt;/h1>');
+		/**Create content for Modal */
+		let imageElementFront = $('&lt;img class="modal-img" style="width:50%">');
+		imageElementFront.attr('src', pokemon.imageUrlFront);
+		imageElementFront.attr(
+			'sr-only',
+			'Front image of ' + pokemon.name + '&lt;/p>'
+		);
+
+		let imageElementBack = $('&lt;img class="modal-img" style="width:50%">');
+		imageElementBack.attr('src', pokemon.imageUrlBack);
+		imageElementBack.attr('sr-only', 'Back image of ' + pokemon.name + '&lt;/p>');
+
+		let heightElement = $('&lt;p>' + 'Height : ' + pokemon.height + '&lt;/p>');
+
+		let types = ' ';
+		pokemon.types.map(({ type }) => (types = types + ' ' + type.name));
+		let contentElementTypes = $('&lt;p>' + 'Types : ' + types + '&lt;/p>');
+		contentElementTypes.attr('src', pokemon.types);
+
+		/**Append title and content to Modal */
+		modalHeader.append(nameElement);
+		modalBody.append(imageElementFront);
+		modalBody.append(imageElementBack);
+		modalBody.append(heightElement);
+		modalBody.append(contentElementTypes);
+	}
+
+	return {
+		add: add,
+		getAll: getAll,
+		addListItem: addListItem,
+		loadList: loadList,
+		loadDetails: loadDetails,
+		showModal: showModal,
+	};
+})();
+
+console.log(PokemonRepository.getAll()); // see repository with the alteration
+
+PokemonRepository.loadList().then(function () {
+	PokemonRepository.getAll().forEach(function (pokemon) {
+		PokemonRepository.addListItem(pokemon);
+	});
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Thu Aug 12 2021 21:26:53 GMT+1000 (Australian Eastern Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
