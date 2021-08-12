@@ -2,14 +2,18 @@ let PokemonRepository = (function () {
 	let repository = [];
 	let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
-	// function to validate information of pokemons to be added. It must be an object and it must have three fields,
-	//will show message at console.
+	/**  Function to validate information of pokemons to be added.
+	 * It must be an object and it must have three fields,
+	 * will show message at console.
+	 */
 	const itemCheck = (item) => {
 		const itemArray = item['name'] !== undefined;
 
 		return itemArray;
 	};
-	// Check if pokemon has the correct data to be part of the list. If it doesn't, then error message.
+	/** Check if pokemon has the correct data to be part of the list.
+	 * If it doesn't, then error message.
+	 */
 	function add(pokemon) {
 		if (itemCheck(pokemon)) {
 			repository.push(pokemon);
@@ -23,30 +27,30 @@ let PokemonRepository = (function () {
 	}
 
 	function addListItem(pokemon) {
-		// create new variable for ul added at 'index.html' file
+		/** create new variable for ul added at 'index.html' file */
 		let newList = document.querySelector('.pokemon-list');
 
-		// create il element
+		/** create il element */
 		let listPokemon = document.createElement('li');
-		// Add class to style it with Bootstrap
+		/** Add class to style it with Bootstrap  */
 		listPokemon.classList.add('group-list-item');
 
-		// create button with pokemon's names for each element
+		/** create button with pokemon's names for each element */
 		const button = document.createElement('button');
 		button.innerText = pokemon.name;
 
-		// add class to button to style it with Bootstrap
+		/** add class to button to style it with Bootstrap*/
 		button.classList.add('buttonStyle', 'group-list-item', 'btn-light');
 		button.setAttribute('data-toggle', 'modal');
 		button.setAttribute('data-target', '#modal-container');
 
-		// call function with details on pokemon on click:
+		/**  call function with details on pokemon on click:*/
 		addButtonEvent(button, pokemon);
 
-		// append button to the list item
+		/** append button to the list item*/
 		listPokemon.appendChild(button);
 
-		// append list item to the unordered list
+		/** append list item to the unordered list */
 		newList.appendChild(listPokemon);
 	}
 
@@ -54,7 +58,7 @@ let PokemonRepository = (function () {
 		button.addEventListener('click', function () {
 			showDetails(pokemon);
 		});
-	// Fetch details of pokemon from API
+	/** Fetch details of pokemon from API */
 	function loadList() {
 		return fetch(apiUrl)
 			.then(function (response) {
@@ -76,7 +80,7 @@ let PokemonRepository = (function () {
 				console.error(e);
 			});
 	}
-	//Load details of pokemons from API to Modal
+	/** Load details of pokemons from API to Modal*/
 	function loadDetails(pokemon) {
 		let url = pokemon.detailsUrl;
 		return fetch(url)
@@ -94,7 +98,7 @@ let PokemonRepository = (function () {
 				console.error(e);
 			});
 	}
-	//Show details of pokemon on console and on Modal
+	/** Show details of pokemon on console and on Modal*/
 	function showDetails(pokemon) {
 		loadDetails(pokemon).then(function (response) {
 			console.log(response);
@@ -102,18 +106,18 @@ let PokemonRepository = (function () {
 		});
 	}
 
-	// Show modal with pokemon's details
+	/** Show modal with pokemon's details*/
 	function showModal(pokemon) {
 		let modalBody = $('.modal-body');
 		let modalTitle = $('.modal-title');
 		let modalHeader = $('.modal-header');
-		// Empty modal
+		/** Empty modal */
 		modalHeader.empty();
 		modalTitle.empty();
 		modalBody.empty();
-		// Create title for Modal
+		/**Create title for Modal */
 		let nameElement = $('<h1>' + pokemon.name + '</h1>');
-		// Create content for Modal
+		/**Create content for Modal */
 		let imageElementFront = $('<img class="modal-img" style="width:50%">');
 		imageElementFront.attr('src', pokemon.imageUrlFront);
 		imageElementFront.attr(
@@ -132,7 +136,7 @@ let PokemonRepository = (function () {
 		let contentElementTypes = $('<p>' + 'Types : ' + types + '</p>');
 		contentElementTypes.attr('src', pokemon.types);
 
-		// Append title and content to Modal
+		/**Append title and content to Modal */
 		modalHeader.append(nameElement);
 		modalBody.append(imageElementFront);
 		modalBody.append(imageElementBack);
