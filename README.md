@@ -14,6 +14,13 @@ Users can find names, images, types and height of Pokemons of their choosing. Th
 - Loads view of a list of items
 - On user click, view opens with details for item clicked
 
+## Technologies
+
+- Bootstrap
+- CSS
+- HTML
+- JavaScript
+
 ### Author
 
 [Tanimara Elias Santos](https://github.com/anthropovixen)
