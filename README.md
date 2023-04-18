@@ -4,7 +4,7 @@ This application is a Pokemon Index built wiht HTML, CSS and JavaScript that loa
 
 Users can find names, images, types and height of Pokemons of their choosing. The API used for this project is the [Pokémon API](https://pokeapi.co/).
 
-**See the hosted application [here](https://anthropovixen.github.io/pokedexproject/).**
+**See the hosted application [here](https://tanimaraeliassantos.github.io/pokedexproject/).**
 
 ![Pokemon Index Showcase](img/pokedexshowcase.gif)
 
